@@ -29,12 +29,12 @@ else
   endif
 endif
 
-exec 'set runtimepath+=' . g:onyxvim_dein_install_dir
+exec 'set runtimepath+=' . expand(g:onyxvim_dein_install_dir)
 
-if dein#load_state(g:onyxvim_plugin_bundle_dir)
-  call dein#begin(g:onyxvim_plugin_bundle_dir)
+if dein#load_state(expand(g:onyxvim_plugin_bundle_dir))
+  call dein#begin(expand(g:onyxvim_plugin_bundle_dir))
 
-  call dein#add(g:onyxvim_dein_install_dir)
+  call dein#add(expand(g:onyxvim_dein_install_dir))
   call dein#add('morhetz/gruvbox')
   call dein#add('pangloss/vim-javascript', { 'on_ft': ['javascript']})
   call dein#add('mxw/vim-jsx', { 'on_ft': ['javascript'] })
