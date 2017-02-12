@@ -44,7 +44,7 @@ if dein#load_state(g:onyxvim_plugin_bundle_dir)
   call dein#add('mmalecki/vim-node.js', { 'on_ft': ['javascript']})
   call dein#add('elzr/vim-json', { 'on_ft': ['javascript', 'json']})
   call dein#add('othree/javascript-libraries-syntax.vim', { 'on_ft': ['javascript', 'coffee', 'ls', 'typescript']})
-  call dein#add('Valloric/MatchTagAlways', { 'on_ft': ['jsx'] })
+  call dein#add('Valloric/MatchTagAlways', { 'on_ft': ['html, jsx, xml'] })
 
   call dein#add('christoomey/vim-tmux-navigator', { 'if': '!empty($TMUX)' })
   call dein#add('tpope/vim-repeat')
@@ -58,6 +58,7 @@ if dein#load_state(g:onyxvim_plugin_bundle_dir)
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('edkolev/tmuxline.vim', { 'if': '!empty($TMUX)' })
   call dein#add('tpope/vim-fugitive')
+  call dein#add('airblade/vim-gitgutter')
 
   " Unite/Denite
   call dein#add('nixprime/cpsm', { 'build': 'PY3=ON ./install.sh' })
@@ -72,7 +73,7 @@ if dein#load_state(g:onyxvim_plugin_bundle_dir)
 
   call dein#add('SirVer/ultisnips')
   call dein#add('honza/vim-snippets')
-  call dein#add('ternjs/tern_for_vim', { 'on_ft': ['javascript'] })
+  call dein#add('ternjs/tern_for_vim', { 'build': 'npm install', 'on_ft': ['javascript'] })
   call dein#add('carlitux/deoplete-ternjs', { 'on_ft': ['javascript'] })
   call dein#add('othree/jspc.vim', { 'on_ft': ['javascript'] })
 
@@ -144,3 +145,5 @@ call denite#custom#source(
 call denite#custom#source(
       \ 'file_rec', 'sorters', ['sorter_sublime'])
 nnoremap <leader>t :<C-u>Denite file_rec<cr>
+nnoremap <leader>e :<C-u>Denite buffer<cr>
+nnoremap <leader>g :<C-u>Denite grep<cr>
