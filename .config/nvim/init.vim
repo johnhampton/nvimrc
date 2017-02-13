@@ -12,7 +12,6 @@ let g:onyxvim_dein_install_dir=join([
       \ 'dein.vim'],
       \ g:Fsep)
 
-
 if filereadable(expand(join([g:onyxvim_dein_install_dir,
       \ 'README.md'],
       \ g:Fsep)))
@@ -69,9 +68,9 @@ if dein#load_state(g:onyxvim_plugin_bundle_dir)
   call dein#add('benjie/neomake-local-eslint.vim', { 'depends': 'neomake' })
 
   call dein#add('Shougo/deoplete.nvim')
+  call dein#add('SirVer/ultisnips')
   call dein#add('ervandew/supertab')
 
-  call dein#add('SirVer/ultisnips')
   call dein#add('honza/vim-snippets')
   call dein#add('ternjs/tern_for_vim', { 'build': 'npm install', 'on_ft': ['javascript'] })
   call dein#add('carlitux/deoplete-ternjs', { 'on_ft': ['javascript'] })
