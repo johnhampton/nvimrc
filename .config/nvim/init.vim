@@ -63,7 +63,8 @@ if dein#load_state(expand(g:onyxvim_plugin_bundle_dir))
   call dein#add('nixprime/cpsm', { 'build': 'PY3=ON ./install.sh' })
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/vimfiler.vim', { 'on_map': {'n': '<Plug>'}, 'depends': 'unite.vim' })
+  call dein#add('Shougo/neomru.vim')
+  call dein#add('Shougo/vimfiler.vim', { 'depends': 'unite.vim' })
   call dein#add('neomake/neomake')
   call dein#add('benjie/neomake-local-eslint.vim', { 'depends': 'neomake' })
 
@@ -75,6 +76,9 @@ if dein#load_state(expand(g:onyxvim_plugin_bundle_dir))
   call dein#add('ternjs/tern_for_vim', { 'build': 'npm install', 'on_ft': ['javascript'] })
   call dein#add('carlitux/deoplete-ternjs', { 'on_ft': ['javascript'] })
   call dein#add('othree/jspc.vim', { 'on_ft': ['javascript'] })
+
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('qpkorr/vim-bufkill')
 
   call dein#end()
   call dein#save_state()
@@ -126,7 +130,8 @@ autocmd! VimLeave * let g:neomake_verbose = 0
 "autocmd! BufWritePost * let g:neomake_verbose = 1
 "
 " mapping
-nmap <silent> <F3> :VimFilerExplore<CR>
+nmap <silent> <F3> :VimFilerExplore -project <CR>
+nmap <silent> <F4> :VimFilerExplore -project -find <CR>
 nnoremap <silent> <F8> :Neomake<cr>
 
 let g:deoplete#omni#functions = {}
@@ -142,7 +147,37 @@ call denite#custom#var('file_rec', 'command',
 call denite#custom#source(
       \ 'file_rec', 'matchers', ['matcher_cpsm'])
 call denite#custom#source(
+      \ 'file_mru', 'matchers', ['matcher_cpsm'])
+call denite#custom#source(
       \ 'file_rec', 'sorters', ['sorter_sublime'])
+
+" Ag command on grep source
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts',
+      \ ['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+" Change mappings.
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-n>',
+      \ '<denite:move_to_next_line>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-p>',
+      \ '<denite:move_to_previous_line>',
+      \ 'noremap'
+      \)
+
 nnoremap <leader>t :<C-u>Denite file_rec<cr>
 nnoremap <leader>e :<C-u>Denite buffer<cr>
 nnoremap <leader>g :<C-u>Denite grep<cr>
+nnoremap <leader>r :<C-u>Denite file_mru<cr>
+
+" Hack
+autocmd FileType javascript set formatprg=prettier-eslint\ --stdin
