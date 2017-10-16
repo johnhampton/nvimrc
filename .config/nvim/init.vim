@@ -97,7 +97,6 @@ let mapleader="\<Space>"
 
 colorscheme gruvbox
 set background=dark
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set expandtab
 set shiftwidth=2
 set softtabstop=2
@@ -109,6 +108,7 @@ set relativenumber
 set number          " Display line numbers
 
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 let g:AutoPairsFlyMode = 1
 let g:mta_filetypes = {
       \ 'javascript.jsx': 1,
@@ -180,4 +180,4 @@ nnoremap <leader>g :<C-u>Denite grep<cr>
 nnoremap <leader>r :<C-u>Denite file_mru<cr>
 
 " Hack
-autocmd FileType javascript set formatprg=prettier-eslint\ --stdin
+autocmd FileType javascript setlocal formatprg=prettier-eslint\ --stdin
